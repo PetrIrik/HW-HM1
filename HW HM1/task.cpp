@@ -101,7 +101,7 @@ std::tuple<std::string, PhoneNumber> PhoneBook::GetPhoneNumber(const std::string
 	std::string res = "";
 	int count = 0;
 	std::for_each(record.begin(), record.end(), 
-		[&](const auto& rec)
+		[&](auto& rec)
 		{
 			if (rec.first.GetLasttname() == LastName)
 			{
