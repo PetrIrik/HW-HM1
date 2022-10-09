@@ -5,6 +5,7 @@
 int main()
 {
 	std::ifstream file("XXX"); // путь к файлу PhoneBook.txt PhoneBook book(file);
+	PhoneBook book;
 	std::cout << book;
 	std::cout << book;
 	std::cout << "------SortByPhone-------" << std::endl;

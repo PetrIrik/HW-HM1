@@ -41,7 +41,7 @@ std::ostream operator<<(std::ostream out, PhoneBook PhBook)
 	return out;
 }
 
-PhoneBook::PhoneBook(std::ifstream fstr)
+PhoneBook::PhoneBook(std::ifstream fstream)
 {
 	std::string LastName;
 	std::string FirstName;
@@ -52,9 +52,9 @@ PhoneBook::PhoneBook(std::ifstream fstr)
 	std::optional<std::string> ext;
 	std::optional<int> Ex_Number;
 
-	if (fstr.is_open())
+	if (fstream.is_open())
 	{
-		while (fstr>>LastName>>FirstName>>Patronymic.emplace() >> Ccountry>> Ñcity >>Number>>Ex_Number.emplace())
+		while (fstream>>LastName>>FirstName>>Patronymic.emplace() >> Ccountry>> Ñcity >>Number>>Ex_Number.emplace())
 		{
 			if (Patronymic.has_value())
 			{
@@ -80,7 +80,7 @@ PhoneBook::PhoneBook(std::ifstream fstr)
 			record.push_back(std::make_pair(person, phoneNum));
 		}
 	}
-	fstr.close();
+	fstream.close();
 }
 
 void PhoneBook::SortByName()
@@ -100,7 +100,8 @@ std::tuple<std::string, PhoneNumber> PhoneBook::GetPhoneNumber(const std::string
 	PhoneNumber nubmer;
 	std::string res = "";
 	int count = 0;
-	std::for_each(record.begin(), record.end(), [&](const auto& rec)
+	std::for_each(record.begin(), record.end(), 
+		[&](const auto& rec)
 		{
 			if (rec.first.GetLasttname() == LastName)
 			{
@@ -108,7 +109,8 @@ std::tuple<std::string, PhoneNumber> PhoneBook::GetPhoneNumber(const std::string
 				count++;
 			}
 		});
-	if (count == 0) res = "not found";
+	if (count == 0) 
+	res = "not found";
 	else if (count > 1) res = "found more than 1";
 	return std::make_tuple(res, nubmer);
 	
